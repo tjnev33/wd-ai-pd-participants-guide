@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Small Moves, Big Possibilities | West District School</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-deep: #0F5E53;
+    --teal: #1A7A6D;
+    --teal-mid: #2A9D8F;
+    --teal-light: #A8DADC;
+    --teal-wash: #E8F5F3;
+    --teal-ghost: #F3FAF9;
+    --warm: #F4A261;
+    --warm-light: #FFF0E0;
+    --coral: #E76F51;
+    --dark: #1D3557;
+    --gray: #457B9D;
+    --light-gray: #F1FAEE;
+    --white: #FFFFFF;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --radius: 12px;
+    --shadow-sm: 0 1px 3px rgba(15,94,83,0.08);
+    --shadow-md: 0 4px 16px rgba(15,94,83,0.1);
+    --shadow-lg: 0 8px 32px rgba(15,94,83,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--teal-ghost);
+    color: var(--dark);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 40%, var(--teal-mid) 100%);
+    padding: 2.5rem 2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    top: -40%; right: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(168,218,220,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: -30%; left: 10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(244,162,97,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header-content {
+    max-width: 820px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .header-tag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    background: rgba(255,255,255,0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  .header-title {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 0.4rem;
+  }
+  .header-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--teal-light);
+    font-weight: 400;
+  }
+
+  /* ── Tab Navigation ── */
+  .tab-nav {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    padding: 0 2rem;
+    position: relative;
+    top: -1px;
+  }
+  .tab-btn {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.85rem 1.5rem;
+    background: var(--teal-wash);
+    color: var(--teal-deep);
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-radius: var(--radius) var(--radius) 0 0;
+    position: relative;
+    opacity: 0.75;
+  }
+  .tab-btn:hover { opacity: 1; background: var(--white); }
+  .tab-btn.active {
+    background: var(--white);
+    color: var(--teal-deep);
+    opacity: 1;
+    box-shadow: var(--shadow-sm);
+    z-index: 2;
+  }
+
+  /* ── Main Content ── */
+  .main-content {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+  }
+  .tab-panel {
+    display: none;
+    background: var(--white);
+    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+    animation: fadeIn 0.3s ease;
+  }
+  .tab-panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Typography ── */
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--teal-deep);
+    margin-bottom: 0.8rem;
+    line-height: 1.25;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--teal);
+    margin: 1.8rem 0 0.6rem;
+  }
+  p { margin-bottom: 1rem; }
+
+  /* ── Collapsible Sections ── */
+  .collapsible {
+    border: 1px solid var(--teal-light);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+  .collapsible:hover { box-shadow: var(--shadow-sm); }
+  .collapsible-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--teal-ghost);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--teal-deep);
+    border: none;
+    width: 100%;
+    text-align: left;
+    transition: background 0.2s ease;
+  }
+  .collapsible-header:hover { background: var(--teal-wash); }
+  .collapsible-icon {
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+    color: var(--teal-mid);
+    flex-shrink: 0;
+  }
+  .collapsible.open .collapsible-icon { transform: rotate(90deg); }
+  .collapsible-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 1.25rem;
+  }
+  .collapsible.open .collapsible-body {
+    max-height: 3000px;
+    padding: 1.25rem;
+  }
+
+  /* ── Callout Boxes ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin: 1.2rem 0;
+  }
+  .callout-teal {
+    background: var(--teal-wash);
+    border-left: 4px solid var(--teal);
+  }
+  .callout-warm {
+    background: var(--warm-light);
+    border-left: 4px solid var(--warm);
+  }
+  .callout-label {
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+  .callout-teal .callout-label { color: var(--teal-deep); }
+  .callout-warm .callout-label { color: var(--coral); }
+
+  /* ── UDL Principle Cards ── */
+  .udl-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.2rem 0;
+  }
+  .udl-card {
+    background: var(--teal-ghost);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    text-align: center;
+    border: 1px solid var(--teal-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .udl-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .udl-card .icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .udl-card .label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--teal-deep);
+    margin-bottom: 0.3rem;
+  }
+  .udl-card .desc {
+    font-size: 0.82rem;
+    color: var(--gray);
+    line-height: 1.45;
+  }
+
+  /* ── Copy Prompt Block ── */
+  .prompt-block {
+    background: var(--teal-ghost);
+    border: 2px solid var(--teal);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+  .prompt-block-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--teal-deep);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .prompt-text {
+    font-size: 0.92rem;
+    color: var(--dark);
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--teal);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .copy-btn:hover { background: var(--teal-deep); transform: translateY(-1px); }
+  .copy-btn.copied { background: var(--warm); }
+
+  /* ── Tool Table ── */
+  .tool-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .tool-table thead th {
+    background: var(--teal-deep);
+    color: var(--white);
+    font-weight: 600;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .tool-table tbody td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--teal-light);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .tool-table tbody tr:nth-child(even) { background: var(--teal-ghost); }
+  .tool-table tbody tr:last-child td { border-bottom: none; }
+  .tool-name {
+    font-weight: 700;
+    color: var(--teal-deep);
+    white-space: nowrap;
+  }
+
+  /* ── Sandbox Pathway Cards ── */
+  .pathway-card {
+    border: 1px solid var(--teal-light);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  .pathway-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--teal-ghost);
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+    transition: background 0.2s ease;
+  }
+  .pathway-header:hover { background: var(--teal-wash); }
+  .pathway-emoji { font-size: 1.4rem; }
+  .pathway-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--teal-deep);
+  }
+  .pathway-for {
+    font-size: 0.82rem;
+    color: var(--gray);
+    margin-left: auto;
+    font-style: italic;
+  }
+  .pathway-chevron {
+    font-size: 0.75rem;
+    color: var(--teal-mid);
+    transition: transform 0.3s ease;
+    margin-left: 0.5rem;
+  }
+  .pathway-card.open .pathway-chevron { transform: rotate(90deg); }
+  .pathway-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 1.25rem;
+  }
+  .pathway-card.open .pathway-body {
+    max-height: 12000px;
+    padding: 1.25rem;
+  }
+  .pathway-body ul {
+    padding-left: 1.2rem;
+    margin: 0.8rem 0;
+  }
+  .pathway-body li {
+    margin-bottom: 0.5rem;
+    line-height: 1.55;
+    color: var(--dark);
+  }
+
+  /* ── Link Button ── */
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--teal);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 0.4rem 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .link-btn:hover { border-bottom-color: var(--teal); }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .site-header { padding: 2rem 1.25rem 1.25rem; }
+    .header-title { font-size: 1.8rem; }
+    .tab-nav { padding: 0 1rem; flex-wrap: wrap; }
+    .tab-btn { font-size: 0.82rem; padding: 0.7rem 1rem; }
+    .main-content { padding: 0 1rem 2rem; }
+    .tab-panel { padding: 1.5rem; }
+    .udl-grid { grid-template-columns: 1fr; }
+    .pathway-for { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <div class="header-content">
+    <span class="header-tag">West District School</span>
+    <h1 class="header-title">Small Moves, Big Possibilities</h1>
+    <p class="header-subtitle">AI in the K–4 Classroom &nbsp;·&nbsp; Increasing Access for Every Learner</p>
+  </div>
+</header>
+
+<!-- ═══ TABS ═══ -->
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="home">Home</button>
+  <button class="tab-btn" data-tab="micro">Micro-Experiment</button>
+  <button class="tab-btn" data-tab="sandbox">Sandbox</button>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main-content">
+
+  <!-- ─── HOME TAB ─── -->
+  <section class="tab-panel active" id="tab-home">
+    <h2>Welcome</h2>
+    <p>Today's session builds on the UDL work you've already done. You've explored how to design learning that reaches every student through multiple means of engagement, representation, and action & expression. Now we're adding a new question:</p>
+
+    <div class="callout callout-teal">
+      <p style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; color: var(--teal-deep); margin: 0;">
+        How can AI help us increase access for every learner in our classrooms?
+      </p>
+    </div>
+
+    <p>AI doesn't replace thoughtful instructional design — it amplifies it. When you already know how to think about access, AI becomes a powerful tool for making that thinking actionable: faster, more personalized, and more varied than what's possible manually.</p>
+
+    <h3>Session Objectives</h3>
+    <ul style="padding-left: 1.3rem; margin-bottom: 1.2rem;">
+      <li>Build a foundational understanding of what FPS has done so far with AI and how to build on it as an educator</li>
+      <li>Understand core documents, approved platforms, and our approach to AI in the classroom</li>
+      <li>Engage directly with AI tools and reflect on how they can increase access for all learners through UDL</li>
+    </ul>
+
+    <h3>CAST's UDL Framework</h3>
+    <div class="udl-grid">
+      <div class="udl-card">
+        <div class="icon">💡</div>
+        <div class="label">Engagement</div>
+        <div class="desc">Multiple ways to motivate and sustain interest</div>
+      </div>
+      <div class="udl-card">
+        <div class="icon">👁️</div>
+        <div class="label">Representation</div>
+        <div class="desc">Multiple ways to present information and content</div>
+      </div>
+      <div class="udl-card">
+        <div class="icon">✋</div>
+        <div class="label">Action & Expression</div>
+        <div class="desc">Multiple ways for students to show what they know</div>
+      </div>
+    </div>
+
+    <div class="callout callout-warm">
+      <div class="callout-label">Keep in Mind</div>
+      <p style="margin: 0;">The biggest risk isn't "AI disruption" — it's believing that what we do now is all there is. Today is about noticing unseen opportunities and asking: <em>What new thing is this making possible for every learner?</em></p>
+    </div>
+
+    <h3>Is It UDL?</h3>
+    <p>As you build with AI today, use this quick self-check from your UDL, Accommodations, and Modifications one-pager:</p>
+    <div class="callout callout-teal">
+      <p style="margin: 0 0 0.5rem 0;"><strong>✅ Standard-Aligned</strong> — The core learning goal remains the same for every student.</p>
+      <p style="margin: 0 0 0.5rem 0;"><strong>✅ Barrier-Specific</strong> — The support changes the process (how they do it), not the product. Cognitive demand is not reduced.</p>
+      <p style="margin: 0 0 0.5rem 0;"><strong>✅ Available to Everyone</strong> — The tool is offered to all students, but students choose whether they need it.</p>
+      <p style="margin: 0;"><strong>✅ Construct-Safe</strong> — If a student uses this support and succeeds, you can still confirm they mastered the standard.</p>
+    </div>
+
+    <h3>Resources</h3>
+    <p>
+      <a href="https://udlguidelines.cast.org/" target="_blank" class="link-btn">CAST UDL Guidelines ↗</a>
+    </p>
+    <p>
+      <a href="https://docs.google.com/document/d/1ahRhi5rvLr86CdHBcOe9tyNtbK95Ti0f0UA-aPHdiYs/edit?usp=sharing" target="_blank" class="link-btn">UDL, Accommodations & Modifications One-Pager ↗</a>
+    </p>
+  </section>
+
+  <!-- ─── MICRO-EXPERIMENT TAB ─── -->
+  <section class="tab-panel" id="tab-micro">
+    <h2>Micro-Experiment</h2>
+    <p>The micro-experiment is the heart of today's session. It has three phases: an AI-powered interview, hands-on building time, and a Show & Stroll to see what others created.</p>
+
+    <!-- Phase 1 -->
+    <div class="collapsible open">
+      <button class="collapsible-header">
+        <span class="collapsible-icon">▶</span>
+        Phase 1: AI Interview (~15 min)
+      </button>
+      <div class="collapsible-body">
+        <p>You're about to have a short coaching conversation with Gemini. It will ask you a few questions about your teaching, your students, and where you see access challenges. Then it will give you a specific recommendation for how AI could help you increase access for all learners — grounded in the UDL principles you already know.</p>
+
+        <h3>How It Works</h3>
+        <ol style="padding-left: 1.3rem; margin-bottom: 1rem;">
+          <li style="margin-bottom: 0.5rem;">Open <strong>Gemini</strong> from your Google Apps menu (the waffle icon)</li>
+          <li style="margin-bottom: 0.5rem;">Copy the prompt below and paste it into Gemini</li>
+          <li style="margin-bottom: 0.5rem;">Upload or reference the <strong>FPS AI Use Guide</strong> and <strong>CAST UDL Guidelines</strong> when Gemini asks or as part of your conversation</li>
+          <li style="margin-bottom: 0.5rem;">Answer Gemini's questions honestly — there are no wrong answers</li>
+          <li>At the end, you'll receive a <strong>UDL-aligned recommendation</strong> and a <strong>starter prompt</strong> to use in Phase 2</li>
+        </ol>
+
+        <div class="callout callout-teal" style="margin-bottom: 1rem;">
+          <div class="callout-label">Quick Links — Copy these into your Gemini chat</div>
+          <p style="margin: 0.4rem 0;">
+            <a href="https://docs.google.com/document/d/1ahW7O8_jYpgmDDvFXSx6mebckB_QNhxePJ5YolkkyTw/edit?usp=sharing" target="_blank" class="link-btn">FPS AI Use Guide ↗</a>
+          </p>
+          <p style="margin: 0.4rem 0;">
+            <a href="https://udlguidelines.cast.org/" target="_blank" class="link-btn">CAST UDL Guidelines ↗</a>
+          </p>
+          <p style="margin: 0.4rem 0;">
+            <a href="https://docs.google.com/document/d/1ahRhi5rvLr86CdHBcOe9tyNtbK95Ti0f0UA-aPHdiYs/edit?usp=sharing" target="_blank" class="link-btn">UDL, Accommodations & Modifications One-Pager ↗</a>
+          </p>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">📋 AI Interview Prompt</div>
+          <div class="prompt-text" id="interview-prompt">You are a supportive, thoughtful AI coach helping a K–4 teacher explore how AI can increase access for all learners through proactive, Universal Design for Learning (UDL) strategies. You have read the attached FPS AI Use Guide and understand the district's approved platforms, expectations, and approach. You are also deeply familiar with CAST's UDL framework — the principles of providing multiple means of engagement, representation, and action & expression.
+
+Important: UDL is about proactive design for the whole class — not reactive supports for individual students. A UDL strategy should be available to every student in the room, maintain the same learning goals, and remove barriers in how students access or demonstrate learning without reducing the cognitive demand. If a recommendation would only apply to one student or would require changing the learning goal, it is an accommodation or modification, not UDL.
+
+Your job is to conduct a short interview (3–4 questions, asked one at a time) to help this teacher identify one specific, practical way they could use AI to design learning that reaches every student from the start. Wait for their response before asking the next question.
+
+Start by asking what grade level they teach and what feels most challenging right now when it comes to reaching every learner — where do they notice students disengaging, struggling to access the content, or lacking ways to show what they know?
+
+As the interview progresses, listen carefully and narrow toward a recommendation that is: specific to their grade level and context; aligned with one or more UDL principles (engagement, representation, or action & expression); designed for the whole class (any student can use it, but not every student has to); connected to a Gemini tool they could use to make it real (Canvas, Create Image, Guided Learning, or Create Music); something they could realistically try within the next two weeks; and grounded in the FPS AI Use Guide.
+
+After your final question, provide a clear, concise recommendation that includes: what to try, which UDL principle it supports, which Gemini tool to use, and a suggested first prompt they could copy and paste to get started. Also include a quick "Is it UDL?" check: confirm that the recommendation is standard-aligned (same learning goal for all), barrier-specific (changes the process, not the product), and available to everyone (students choose whether to use it).
+
+Keep your tone warm, curious, and encouraging. This teacher may be brand new to AI. Never make them feel behind. Help them see that AI isn't replacing what they already know about access — it's amplifying it.</div>
+          <button class="copy-btn" onclick="copyPrompt()">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="collapsible">
+      <button class="collapsible-header">
+        <span class="collapsible-icon">▶</span>
+        Phase 2: Build It (~12 min)
+      </button>
+      <div class="collapsible-body">
+        <p>Take the recommendation and starter prompt from your AI Interview and <strong>create something with it</strong>. Paste your starter prompt into Gemini and see what it gives you. Then refine it, adjust it, make it yours.</p>
+
+        <div class="callout callout-warm">
+          <div class="callout-label">Remember</div>
+          <p style="margin: 0;">The goal isn't a finished product. It's a first draft — something real enough that you can show it to a colleague and they can see what you're going for. Think prototype, not polished lesson.</p>
+        </div>
+
+        <h3>Gemini Tools for UDL</h3>
+        <p>Not sure which tool to use? This table maps Gemini's tools to UDL principles:</p>
+
+        <table class="tool-table">
+          <thead>
+            <tr>
+              <th>Tool</th>
+              <th>What It Does</th>
+              <th>UDL Connection</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tool-name">Canvas</td>
+              <td>Creates interactive, editable documents collaboratively with AI</td>
+              <td><strong>Representation</strong> — content in multiple formats; <strong>Action & Expression</strong> — flexible ways to show understanding</td>
+            </tr>
+            <tr>
+              <td class="tool-name">Create Image</td>
+              <td>Generates visuals from text descriptions</td>
+              <td><strong>Representation</strong> — visual supports for concepts; <strong>Engagement</strong> — custom imagery tied to interests</td>
+            </tr>
+            <tr>
+              <td class="tool-name">Guided Learning</td>
+              <td>Walks through a concept step by step with interactive questioning</td>
+              <td><strong>Engagement</strong> — interactive format; <strong>Representation</strong> — scaffolded steps for complex ideas</td>
+            </tr>
+            <tr>
+              <td class="tool-name">Create Music</td>
+              <td>Generates original music from text descriptions</td>
+              <td><strong>Engagement</strong> — emotional connection; <strong>Representation</strong> — auditory representation of concepts</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="collapsible">
+      <button class="collapsible-header">
+        <span class="collapsible-icon">▶</span>
+        Phase 3: Show & Stroll (~5 min)
+      </button>
+      <div class="collapsible-body">
+        <p>Leave your screen open to whatever you created — or whatever you're most excited about — and stand up.</p>
+        <p>Walk around the room and look at 3–4 screens. Notice what people made, what tools they used, and which UDL principles are showing up. You don't need to talk to everyone — just look, absorb, and get inspired.</p>
+        <div class="callout callout-teal">
+          <p style="margin: 0;"><strong>Look for:</strong> What surprised you? What made you think "I want to try that"? What UDL principle do you see in action?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SANDBOX TAB ─── -->
+  <section class="tab-panel" id="tab-sandbox">
+    <h2>Sandbox</h2>
+    <p>The sandbox is your space for continued exploration — on your own time, at your own pace. Choose a pathway based on where you are after today's session. There's no deadline and no deliverable. It's here when you're ready.</p>
+    <p>Each option includes a <strong>Guide Me</strong> prompt you can copy into Gemini. The prompt will start a coaching conversation — Gemini will ask you questions to understand your context before walking you through the task step by step.</p>
+
+    <!-- ══ CONTINUE ══ -->
+    <div class="pathway-card">
+      <button class="pathway-header" onclick="togglePathway(this)">
+        <span class="pathway-emoji">🔄</span>
+        <span class="pathway-title">Continue</span>
+        <span class="pathway-for">Keep going with what you started</span>
+        <span class="pathway-chevron">▶</span>
+      </button>
+      <div class="pathway-body">
+        <p>You started something during the session — now go deeper. Take your AI Interview recommendation and Build It output and refine it further.</p>
+
+        <!-- Continue Option 1 -->
+        <h3>Adapt for a Specific Student Profile</h3>
+        <p>Take what you built and adapt it for a specific student or group of students — for example, a student who needs more visual supports or a student who processes information better through audio.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-c1">You are a supportive AI coach helping a K–4 teacher adapt an existing resource to better reach a specific student or group of students, grounded in CAST's UDL framework.
+
+Start by asking me what I created during today's session and which UDL principle it was aligned to. Then ask me about the specific student or students I'm thinking of — what are their strengths, what barriers do they face, and what kind of supports help them most?
+
+Based on my answers, guide me step by step through adapting my resource. Help me think about which UDL principle would best address this student's needs and how to modify what I already have. At each step, wait for my response before moving on. At the end, give me a specific prompt I can use in Gemini to create the adapted version.</div>
+          <button class="copy-btn" onclick="copyById('prompt-c1', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Continue Option 2 -->
+        <h3>Try a Different UDL Principle</h3>
+        <p>If your first version focused on representation, try building one focused on engagement or action & expression — and see how it changes what you create.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-c2">You are a supportive AI coach helping a K–4 teacher explore a different UDL principle than the one they used in a previous activity. You are deeply familiar with CAST's three UDL principles: engagement, representation, and action & expression.
+
+Start by asking me what I created earlier today and which UDL principle it was connected to. Then help me understand the other two principles in the context of my specific topic and grade level. Ask me which one I'd like to explore next and why.
+
+Once I've chosen, guide me step by step through reimagining my resource through that new UDL lens. Ask questions along the way to make sure the new version is practical for my classroom. At the end, give me a ready-to-use prompt for Gemini to create this new version.</div>
+          <button class="copy-btn" onclick="copyById('prompt-c2', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Continue Option 3 -->
+        <h3>Create a Companion Activity</h3>
+        <p>Build something that pairs with what you already made — a warm-up, an extension, a family-facing version, or a student self-check.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-c3">You are a supportive AI coach helping a K–4 teacher create a companion activity that pairs with something they already built using AI.
+
+Start by asking me what I created during the session, what grade level and subject it's for, and what UDL principle it connects to. Then ask me what kind of companion piece would be most useful — a warm-up to introduce the concept, an extension for students who are ready for more, a family-facing version so caregivers can support learning at home, or something else.
+
+Based on my answers, guide me step by step through designing the companion activity. Help me think about how it connects to the original resource and how it supports access for all learners. At each step, wait for my response before continuing. At the end, give me a prompt I can paste into Gemini to create it.</div>
+          <button class="copy-btn" onclick="copyById('prompt-c3', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Continue Option 4 -->
+        <h3>Refine and Strengthen Your Prompt</h3>
+        <p>Learn how to make your prompts more specific and effective by being clearer about your students' needs, time constraints, and standards.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-c4">You are a supportive AI coach helping a K–4 teacher learn how to write better, more specific prompts for AI tools. Your goal is to help them understand what makes a prompt effective — not just give them a better prompt, but teach them why it works.
+
+Start by asking me to share the prompt I used during today's session and what result I got. Then ask me what I liked about the result and what I wished was different.
+
+Guide me through improving my prompt step by step. Show me how adding details about my students' needs, the UDL principle I'm targeting, the time I have, or the standards I'm working toward changes the quality of the output. At each step, explain why the change matters and wait for my response. At the end, help me write a stronger version of my original prompt that I can use right away.</div>
+          <button class="copy-btn" onclick="copyById('prompt-c4', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PIVOT ══ -->
+    <div class="pathway-card">
+      <button class="pathway-header" onclick="togglePathway(this)">
+        <span class="pathway-emoji">🔀</span>
+        <span class="pathway-title">Pivot</span>
+        <span class="pathway-for">Try a different direction</span>
+        <span class="pathway-chevron">▶</span>
+      </button>
+      <div class="pathway-body">
+        <p>Something during the Show & Stroll or the session sparked a different idea. Start fresh with one of these UDL-aligned explorations:</p>
+
+        <!-- Pivot Option 1 -->
+        <h3>Differentiate an Existing Lesson</h3>
+        <p>Give Gemini a lesson you already teach and explore how to create multiple versions that provide different access points for different learners.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-p1">You are a supportive AI coach helping a K–4 teacher use AI to differentiate an existing lesson using CAST's UDL framework. You understand the three principles: engagement, representation, and action & expression.
+
+Start by asking me what lesson or activity I'd like to differentiate, what grade level it's for, and what I notice about how different students currently experience it — who thrives and who struggles.
+
+Then guide me step by step through creating multiple versions of the lesson that provide different access points. Help me think about which UDL principles each version addresses and what barriers each version removes. At each step, wait for my response before continuing. At the end, give me a prompt I can paste into Gemini to generate the differentiated versions.</div>
+          <button class="copy-btn" onclick="copyById('prompt-p1', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Pivot Option 2 -->
+        <h3>Create Visual Supports</h3>
+        <p>Use Create Image to build vocabulary anchor charts, visual schedules, step-by-step procedure cards, or concept maps for students who need alternative representations.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-p2">You are a supportive AI coach helping a K–4 teacher create visual supports for their classroom using AI image generation, grounded in the UDL principle of representation — providing multiple ways to present information and content.
+
+Start by asking me what subject and grade level I teach, and where I notice students struggling because the information is only presented in one way (usually text or verbal). Ask me what kind of visual support might help — a vocabulary anchor chart, a visual schedule, a step-by-step procedure card, a concept map, or something else.
+
+Guide me step by step through designing the visual support. Help me think about what should be included, how to make it clear and accessible, and what details to include in an image generation prompt. At each step, wait for my response. At the end, give me a ready-to-use prompt for Gemini's Create Image tool.</div>
+          <button class="copy-btn" onclick="copyById('prompt-p2', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Pivot Option 3 -->
+        <h3>Design a Choice Board</h3>
+        <p>Create a choice board for a unit that offers students multiple means of action and expression — different ways to show what they know.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-p3">You are a supportive AI coach helping a K–4 teacher design a student choice board grounded in the UDL principle of action and expression — providing multiple ways for students to demonstrate their learning.
+
+Start by asking me what unit or topic the choice board is for, what grade level, and what I want students to know or be able to do by the end. Then ask me about my students — what range of needs, strengths, and interests do I see in my classroom?
+
+Guide me step by step through designing the choice board. Help me think about offering options that span different modalities — writing, speaking, drawing, building, performing, digital creation — so every student has a meaningful way in. At each step, wait for my response. At the end, give me a prompt I can paste into Gemini to generate the choice board.</div>
+          <button class="copy-btn" onclick="copyById('prompt-p3', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Pivot Option 4 -->
+        <h3>Build an Interactive Learning Experience</h3>
+        <p>Use Guided Learning to create a scaffolded, step-by-step experience for a concept your students find challenging.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-p4">You are a supportive AI coach helping a K–4 teacher create an interactive, scaffolded learning experience using Gemini's Guided Learning tool, grounded in CAST's UDL principles of engagement and representation.
+
+Start by asking me what concept or skill my students find challenging, what grade level I teach, and what I've already tried. Ask me where students typically get stuck and what kinds of scaffolding have helped in the past.
+
+Guide me step by step through designing a Guided Learning experience that breaks the concept into manageable steps with built-in checkpoints. Help me think about how the interactive format changes access — how it provides engagement through active participation and representation through scaffolded steps. At each step, wait for my response. At the end, give me a prompt I can use in Gemini's Guided Learning tool to create the experience.</div>
+          <button class="copy-btn" onclick="copyById('prompt-p4', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ LEVEL UP ══ -->
+    <div class="pathway-card">
+      <button class="pathway-header" onclick="togglePathway(this)">
+        <span class="pathway-emoji">🚀</span>
+        <span class="pathway-title">Level Up</span>
+        <span class="pathway-for">Think at a systems level</span>
+        <span class="pathway-chevron">▶</span>
+      </button>
+      <div class="pathway-body">
+        <p>You're ready to think beyond a single lesson or resource. How could AI + UDL work together at a bigger scale?</p>
+
+        <!-- Level Up Option 1 -->
+        <h3>UDL-Aligned Unit Plan</h3>
+        <p>Design a unit plan with built-in AI touchpoints — moments where AI could be used to increase access at different stages of the unit.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-l1">You are a supportive AI coach helping a K–4 teacher design a UDL-aligned unit plan that includes intentional moments where AI tools can increase access for all learners. You are deeply familiar with CAST's UDL framework and with Gemini's tools (Canvas, Create Image, Guided Learning, Create Music).
+
+Start by asking me what unit I'm planning, what grade level, and what the key learning goals are. Then ask about my students — what range of needs do I typically see, and where in a typical unit do some students start to lose access?
+
+Guide me through designing the unit step by step. At each stage of the unit (launch, explore, practice, assess), help me identify where a UDL principle could be applied and where an AI tool could make that principle actionable. Wait for my response at each step. At the end, give me a summary of the unit plan with the AI touchpoints mapped to UDL principles.</div>
+          <button class="copy-btn" onclick="copyById('prompt-l1', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Level Up Option 2 -->
+        <h3>UDL Access Strategy Bank</h3>
+        <p>Create a bank of proactive, whole-class access strategies for a specific content area — organized by UDL principle — that any student can use without changing the learning goal.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-l2">You are a supportive AI coach helping a K–4 teacher build a bank of proactive UDL access strategies for their content area. These strategies must be true UDL — available to the whole class, maintaining the same learning goals, and removing barriers in how students access or demonstrate learning without reducing cognitive demand.
+
+Important: UDL strategies are different from accommodations (reactive, for individual students with IEP/504 plans) and modifications (which change the learning goal itself). Every strategy in this bank should pass the "Is it UDL?" test: it's standard-aligned, barrier-specific, available to everyone, and construct-safe.
+
+Start by asking me what content area and grade level I teach. Then ask about where I notice the most barriers — is it in how students engage with the content, how information is represented, or how students express their learning?
+
+Guide me step by step through building the bank. Organize it by UDL principle (engagement, representation, action & expression) and include ideas for how AI tools could help create or deliver each strategy. At each step, help me check whether the strategy is truly UDL and not an accommodation or modification. Wait for my response before moving on. At the end, help me generate the bank in a format I can use and share with colleagues.</div>
+          <button class="copy-btn" onclick="copyById('prompt-l2', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Level Up Option 3 -->
+        <h3>Student Self-Assessment</h3>
+        <p>Explore how AI could help you create self-assessment tools that allow students to reflect on their own learning in ways that are accessible to all.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-l3">You are a supportive AI coach helping a K–4 teacher design accessible self-assessment tools for students, grounded in CAST's UDL framework. You understand that self-assessment itself needs to be designed with UDL in mind — students need multiple ways to reflect on their learning.
+
+Start by asking me what grade level I teach and what I currently use for student self-assessment. Ask me what works about it and where some students struggle to engage with the reflection process.
+
+Guide me step by step through designing self-assessment options that are accessible to all learners — including visual formats, simplified text, auditory options, and emoji or image-based scales. Help me think about how each option connects to UDL principles. Wait for my response at each step. At the end, give me prompts I can use in Gemini to create two or three different self-assessment formats for the same learning goal.</div>
+          <button class="copy-btn" onclick="copyById('prompt-l3', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Level Up Option 4 -->
+        <h3>Family Communication</h3>
+        <p>Draft family communications about learning supports in multiple formats and at different reading levels, so every family can access the information they need.</p>
+        <div class="prompt-block">
+          <div class="prompt-block-label">🧭 Guide Me</div>
+          <div class="prompt-text" id="prompt-l4">You are a supportive AI coach helping a K–4 teacher use AI to create family communications that are accessible to all families, grounded in the UDL principle of representation — providing information in multiple formats.
+
+Start by asking me what I need to communicate to families — is it about a specific learning support, a classroom routine, a unit overview, or something else? Ask me what grade level I teach and what I know about the communication needs of my families — reading levels, languages, preferred formats.
+
+Guide me step by step through creating multiple versions of the same communication. Help me think about varying the reading level, the format (text, visual summary, bullet points, infographic-style), and the length. At each step, wait for my response. At the end, give me prompts I can use in Gemini to generate two or three versions of the communication at different levels of complexity.</div>
+          <button class="copy-btn" onclick="copyById('prompt-l4', this)">
+            <span class="copy-icon">📋</span>
+            <span class="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-teal" style="margin-top: 1.5rem;">
+      <p style="margin: 0;"><strong>A reminder:</strong> Each of these pathways is designed to take 20–30 minutes. You might explore one this week and another next month. The point isn't to do everything — it's to keep the thread going.</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Collapsible sections
+  document.querySelectorAll('.collapsible-header').forEach(header => {
+    header.addEventListener('click', () => {
+      header.parentElement.classList.toggle('open');
+    });
+  });
+
+  // Pathway expandable cards
+  function togglePathway(btn) {
+    btn.closest('.pathway-card').classList.toggle('open');
+  }
+
+  // Copy prompt with fallback
+  function copyPrompt() {
+    copyById('interview-prompt', document.querySelector('#tab-micro .copy-btn'));
+  }
+
+  function copyById(id, btn) {
+    const text = document.getElementById(id).textContent;
+    const iconEl = btn.querySelector('.copy-icon');
+    const textEl = btn.querySelector('.copy-text');
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        showCopied(btn, iconEl, textEl);
+      }).catch(() => {
+        fallbackCopy(text, btn, iconEl, textEl, id);
+      });
+    } else {
+      fallbackCopy(text, btn, iconEl, textEl, id);
+    }
+  }
+
+  function fallbackCopy(text, btn, iconEl, textEl, id) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      showCopied(btn, iconEl, textEl);
+    } catch (e) {
+      const range = document.createRange();
+      range.selectNodeContents(document.getElementById(id));
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      textEl.textContent = 'Selected — press Ctrl+C';
+    }
+    document.body.removeChild(ta);
+  }
+
+  function showCopied(btn, iconEl, textEl) {
+    btn.classList.add('copied');
+    textEl.textContent = 'Copied!';
+    iconEl.textContent = '✓';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      textEl.textContent = 'Copy Prompt';
+      iconEl.textContent = '📋';
+    }, 2500);
+  }
+</script>
+
+</body>
+</html>
